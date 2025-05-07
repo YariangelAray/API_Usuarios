@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import ciudadRoutes from "./Routes/ciudadRoutes.js";
-// import generoRoutes from "./Routes/generoRoutes.js";
+import generoRoutes from "./Routes/generoRoutes.js";
 // import lenguajeRoutes from "./Routes/lenguajeRoutes.js";
 // import usuarioRoutes from "./Routes/usuarioRoutes.js";
 // import lenguaje_usuarioRoutes from "./Routes/lenguaje_usuarioRoutes.js";
@@ -14,7 +14,7 @@ app.use(express.urlencoded({"extended":true}))
 
 app.use("/ciudades", ciudadRoutes );
 
-// app.use("/genero", generoRoutes );
+app.use("/generos", generoRoutes );
 
 // app.use("/lenguaje", lenguajeRoutes );
 
