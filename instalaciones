@@ -1,0 +1,6 @@
+npm init -y
+npm install json-server@0.17.4
+npm i mysql2
+npm i body-parser
+npm i express
+npm install --save-dev nodemon
