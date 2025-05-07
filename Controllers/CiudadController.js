@@ -47,7 +47,20 @@ class CiudadController{
 
     static async patchCiudad(req, res) 
     {
-
+        try {
+            const { id } = req.params;
+      
+            const propiedades = req.body;
+        
+            const objCiudad = new Ciudad();
+             
+            await objCiudad.patch(id, propiedades);
+      
+            res.status(201).json({ mensaje: "Ciudad actualizada" });
+            
+          } catch (error) {
+            res.status(500).json({ error: error.message });
+          }  
     }
 
     static async deleteCiudad(req, res) 

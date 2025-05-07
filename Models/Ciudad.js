@@ -39,8 +39,29 @@ class Ciudad{
         }
     }
 
-    async patch(id, nombre){
+    async patch(id, propiedades){
+        try {
 
+            if (!propiedades) {
+              throw new Error("No se han enviado propiedades para actualizar.");        
+            }
+      
+            let sentencia = "";
+            // Recorremos las propiedades y creamos la sentencia SQL
+            for (const key in propiedades) {        
+              sentencia += `${key} = "${propiedades[key]}", `;
+            }            
+            // Eliminamos la última coma y espacio 
+            sentencia = sentencia.slice(0, -2);   
+            
+            const [result] = await connection.query(`UPDATE ciudades SET ${sentencia} WHERE id = ?`, [id]);
+      
+            // Si no se actualizó ningún registro, lanzamos un error
+            if (result.affectedRows === 0) throw new Error("Ciudad no encontrada.");
+      
+        } catch (error) {
+            throw new Error (error.message || "Error al actualizar la ciudad.");          
+        }
     }
 
     async delete(id){
