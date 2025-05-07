@@ -65,7 +65,17 @@ class CiudadController{
 
     static async deleteCiudad(req, res) 
     {
-
+        try {
+            const { id } = req.params;
+      
+            const objCiudad = new Ciudad();
+            await objCiudad.delete(id);      
+            
+            res.status(201).json({ mensaje: "Ciudad eliminada con exito." });
+      
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
     }
 }
 

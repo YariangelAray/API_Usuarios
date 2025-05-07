@@ -1,4 +1,5 @@
 import connection from "../Utils/db.js";
+import Usuario from "./Usuario.js";
 
 class Ciudad{
 
@@ -65,7 +66,28 @@ class Ciudad{
     }
 
     async delete(id){
+        try {
 
+            const objUsuario = new Usuario();
+      
+            // Verificamos si la ciudad tiene usuarios relacionados
+            const usuarios = await objUsuario.getByIdCiudad(id);
+      
+            // Si tiene el resultado es true, lanzamos un error
+            if (usuarios.length > 0){
+              throw new Error("No se puede eliminar la ciudad porque tiene usuarios relacionados.");
+            }
+            
+            const [result] = await connection.query("DELETE FROM ciudades where id=?", [id]);      
+            
+            // Si no se eliminó ningún registro, lanzamos un error
+            if (result.affectedRows === 0) throw new Error("Ciudad no encontrada.");    
+      
+            return;
+      
+          } catch (error) {    
+            throw new Error(error.message || "Error al eliminar la ciudad.");
+          }
     }
 }
 
