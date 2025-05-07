@@ -10,7 +10,7 @@ class Usuario{
     async getByIdGenero(idGenero) {
         const [usuarios] = await connection.query("SELECT * FROM usuarios WHERE id_genero = ?", [idGenero]);        
         return usuarios;
-    }
+    }    
 }
 
 export default Usuario;
