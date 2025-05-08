@@ -1,15 +1,16 @@
 import Ciudad from "../Models/Ciudad.js";
+import CiudadService from "../Services/CiudadService.js";
 
 class CiudadController{
 
     static async getCiudadById(req, res) 
     {
         try {
-            const objCiudad = new Ciudad();
             const { id } = req.params;      
-            const ciudad = await objCiudad.getById(id);    
-            res.json(ciudad);    
-      
+            const ciudadService = new CiudadService();
+            const ciudad = await ciudadService.getById(id);
+            res.json(ciudad);          
+
         } catch (error) {
             res.status(500).json({error: error.message});
         }        
@@ -18,12 +19,11 @@ class CiudadController{
     static async createCiudad(req, res) 
     {
         try {
-            const { nombre } = req.body;        
-            const objCiudad = new Ciudad();
-            const ciudad = await objCiudad.create(nombre);
-            
-            res.status(201).json({mensaje: "Ciudad creada", ciudad});
-      
+            const { nombre } = req.body;                    
+            const ciudadService = new CiudadService();
+            const ciudad = await ciudadService.create(nombre);        
+            res.status(201).json({mensaje: "Ciudad creada.", ciudad});      
+
         } catch (error) {
             res.status(500).json({error: error.message});
         }
@@ -33,12 +33,10 @@ class CiudadController{
     {
         try {
             const { id } = req.params;
-            const { nombre } = req.body;          
-        
-            const objCiudad = new Ciudad();
-            const ciudad = await objCiudad.update(id, nombre);
-            
-            res.status(201).json({mensaje: "Ciudad actualizada", ciudad});
+            const { nombre } = req.body;                              
+            const ciudadService = new CiudadService();
+            const ciudad = await ciudadService.update(id, nombre);        
+            res.status(201).json({mensaje: "Ciudad actualizada.", ciudad});
       
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -49,14 +47,10 @@ class CiudadController{
     {
         try {
             const { id } = req.params;
-      
             const propiedades = req.body;
-        
-            const objCiudad = new Ciudad();
-             
-            await objCiudad.patch(id, propiedades);
-      
-            res.status(201).json({ mensaje: "Ciudad actualizada" });
+            const ciudadService = new CiudadService();
+            await ciudadService.patch(id, propiedades);
+            res.status(201).json({ mensaje: "Ciudad actualizada." });
             
           } catch (error) {
             res.status(500).json({ error: error.message });
@@ -66,12 +60,10 @@ class CiudadController{
     static async deleteCiudad(req, res) 
     {
         try {
-            const { id } = req.params;
-      
-            const objCiudad = new Ciudad();
-            await objCiudad.delete(id);      
-            
-            res.status(201).json({ mensaje: "Ciudad eliminada con exito." });
+            const { id } = req.params;                  
+            const ciudadService = new CiudadService();
+            await ciudadService.delete(id);              
+            res.status(201).json({ mensaje: "Ciudad eliminada." });
       
         } catch (error) {
             res.status(500).json({ error: error.message });
