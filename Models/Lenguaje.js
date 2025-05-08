@@ -71,7 +71,7 @@ class Lenguaje{
             const objUsuariosLeng = new LenguajeUsuario();
       
             // Verificamos si el lenguaje tiene usuarios relacionados
-            const usuarios = await objUsuariosLeng.geUsuariostByIdLenguaje(id);
+            const usuarios = await objUsuariosLeng.geUsuariosByIdLenguaje(id);
       
             // Si tiene el resultado es true, lanzamos un error
             if (usuarios.length > 0){

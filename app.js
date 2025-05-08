@@ -4,7 +4,7 @@ import ciudadRoutes from "./Routes/ciudadRoutes.js";
 import generoRoutes from "./Routes/generoRoutes.js";
 import lenguajeRoutes from "./Routes/lenguajeRoutes.js";
 import usuarioRoutes from "./Routes/usuarioRoutes.js";
-// import lenguaje_usuarioRoutes from "./Routes/lenguaje_usuarioRoutes.js";
+import lenguaje_usuarioRoutes from "./Routes/lenguaje_usuarioRoutes.js";
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.use("/lenguajes", lenguajeRoutes );
 
 app.use("/usuarios", usuarioRoutes );
 
-// app.use("/lenguaje_usuario", lenguaje_usuarioRoutes );
+app.use("/lenguajes_usuarios", lenguaje_usuarioRoutes );
 
 app.listen(3000, () => {
   console.log("Server is running...");  
