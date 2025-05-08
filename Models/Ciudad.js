@@ -1,5 +1,4 @@
 import connection from "../Utils/db.js";
-import Usuario from "./Usuario.js";
 
 class Ciudad{
 
@@ -23,7 +22,7 @@ class Ciudad{
     }
 
     async delete(id){
-        await connection.query("DELETE FROM ciudades where id=?", [id]);      
+        await connection.query("DELETE FROM ciudades WHERE id=?", [id]);      
     }
 }
 

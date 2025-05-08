@@ -1,4 +1,3 @@
-import Ciudad from "../Models/Ciudad.js";
 import CiudadService from "../Services/CiudadService.js";
 
 class CiudadController{

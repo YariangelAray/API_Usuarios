@@ -1,13 +1,13 @@
-import Genero from "../Models/Genero.js";
+import GeneroService from "../Services/GeneroService.js";
 
 class GeneroController{
 
     static async getGeneroById(req, res) 
     {
         try {
-            const objGenero = new Genero();
             const { id } = req.params;      
-            const ciudad = await objGenero.getById(id);    
+            const generoService = new GeneroService();
+            const ciudad = await generoService.getById(id);    
             res.json(ciudad);    
       
         } catch (error) {
@@ -19,8 +19,8 @@ class GeneroController{
     {
         try {
             const { nombre } = req.body;        
-            const objGenero = new Genero();
-            const ciudad = await objGenero.create(nombre);
+            const generoService = new GeneroService();
+            const ciudad = await generoService.create(nombre);
             
             res.status(201).json({mensaje: "Genero creado", ciudad});
       
@@ -33,10 +33,9 @@ class GeneroController{
     {
         try {
             const { id } = req.params;
-            const { nombre } = req.body;          
-        
-            const objGenero = new Genero();
-            const ciudad = await objGenero.update(id, nombre);
+            const { nombre } = req.body;                  
+            const generoService = new GeneroService();
+            const ciudad = await generoService.update(id, nombre);
             
             res.status(201).json({mensaje: "Genero actualizado", ciudad});
       
@@ -49,12 +48,9 @@ class GeneroController{
     {
         try {
             const { id } = req.params;
-      
             const propiedades = req.body;
-        
-            const objGenero = new Genero();
-             
-            await objGenero.patch(id, propiedades);
+            const generoService = new GeneroService();
+            await generoService.patch(id, propiedades);
       
             res.status(201).json({ mensaje: "Genero actualizado" });
             
@@ -66,10 +62,9 @@ class GeneroController{
     static async deleteGenero(req, res) 
     {
         try {
-            const { id } = req.params;
-      
-            const objGenero = new Genero();
-            await objGenero.delete(id);      
+            const { id } = req.params;      
+            const generoService = new GeneroService();
+            await generoService.delete(id);      
             
             res.status(201).json({ mensaje: "Genero eliminado con exito." });
       
