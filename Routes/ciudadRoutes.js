@@ -1,13 +1,14 @@
 import express from "express";
 import CiudadController from "../Controllers/CiudadController.js";
+import { validarCiudad } from "../Middlewares/validarCiudad.js";
 
 const router = express.Router();
 
 router.get('/:id' , CiudadController.getCiudadById);
 
-router.post('/', CiudadController.createCiudad);
+router.post('/', validarCiudad, CiudadController.createCiudad);
 
-router.put('/:id', CiudadController.updateCiudad);
+router.put('/:id', validarCiudad, CiudadController.updateCiudad);
 
 router.patch('/:id', CiudadController.patchCiudad);
 
