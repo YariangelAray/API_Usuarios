@@ -1,12 +1,12 @@
-import Lenguaje from "../Models/Lenguaje.js";
+import LenguajeService from "../Services/LenguajeService.js";
 
 class LenguajeController{
     static async getLenguajeById(req, res) 
     {
         try {
-            const objLenguaje = new Lenguaje();
             const { id } = req.params;      
-            const lenguaje = await objLenguaje.getById(id);    
+            const lenguajeService = new LenguajeService();
+            const lenguaje = await lenguajeService.getById(id);    
             res.json(lenguaje);    
       
         } catch (error) {
@@ -18,8 +18,8 @@ class LenguajeController{
     {
         try {
             const { nombre } = req.body;        
-            const objLenguaje = new Lenguaje();
-            const lenguaje = await objLenguaje.create(nombre);
+            const lenguajeService = new LenguajeService();
+            const lenguaje = await lenguajeService.create(nombre);
             
             res.status(201).json({mensaje: "Lenguaje creado", lenguaje});
       
@@ -34,8 +34,8 @@ class LenguajeController{
             const { id } = req.params;
             const { nombre } = req.body;          
         
-            const objLenguaje = new Lenguaje();
-            const lenguaje = await objLenguaje.update(id, nombre);
+            const lenguajeService = new LenguajeService();
+            const lenguaje = await lenguajeService.update(id, nombre);
             
             res.status(201).json({mensaje: "Lenguaje actualizado", lenguaje});
       
@@ -51,9 +51,9 @@ class LenguajeController{
       
             const propiedades = req.body;
         
-            const objLenguaje = new Lenguaje();
+            const lenguajeService = new LenguajeService();
              
-            await objLenguaje.patch(id, propiedades);
+            await lenguajeService.patch(id, propiedades);
       
             res.status(201).json({ mensaje: "Lenguaje actualizado" });
             
@@ -67,10 +67,10 @@ class LenguajeController{
         try {
             const { id } = req.params;
       
-            const objLenguaje = new Lenguaje();
-            await objLenguaje.delete(id);      
+            const lenguajeService = new LenguajeService();
+            await lenguajeService.delete(id);      
             
-            res.status(201).json({ mensaje: "Lenguaje eliminado con exito." });
+            res.status(201).json({ mensaje: "Lenguaje eliminado." });
       
         } catch (error) {
             res.status(500).json({ error: error.message });

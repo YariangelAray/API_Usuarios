@@ -22,7 +22,7 @@ class GeneroController{
             const generoService = new GeneroService();
             const ciudad = await generoService.create(nombre);
             
-            res.status(201).json({mensaje: "Genero creado", ciudad});
+            res.status(201).json({mensaje: "Género creado", ciudad});
       
         } catch (error) {
             res.status(500).json({error: error.message});
@@ -37,7 +37,7 @@ class GeneroController{
             const generoService = new GeneroService();
             const ciudad = await generoService.update(id, nombre);
             
-            res.status(201).json({mensaje: "Genero actualizado", ciudad});
+            res.status(201).json({mensaje: "Género actualizado", ciudad});
       
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -52,7 +52,7 @@ class GeneroController{
             const generoService = new GeneroService();
             await generoService.patch(id, propiedades);
       
-            res.status(201).json({ mensaje: "Genero actualizado" });
+            res.status(201).json({ mensaje: "Género actualizado" });
             
           } catch (error) {
             res.status(500).json({ error: error.message });
@@ -66,7 +66,7 @@ class GeneroController{
             const generoService = new GeneroService();
             await generoService.delete(id);      
             
-            res.status(201).json({ mensaje: "Genero eliminado con exito." });
+            res.status(201).json({ mensaje: "Género eliminado." });
       
         } catch (error) {
             res.status(500).json({ error: error.message });

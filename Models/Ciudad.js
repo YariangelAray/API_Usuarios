@@ -22,7 +22,7 @@ class Ciudad{
     }
 
     async delete(id){
-        await connection.query("DELETE FROM ciudades WHERE id=?", [id]);      
+        await connection.query("DELETE FROM ciudades WHERE id = ?", [id]);      
     }
 }
 

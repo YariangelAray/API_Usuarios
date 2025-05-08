@@ -22,7 +22,7 @@ class Genero{
     }
 
     async delete(id){
-        await connection.query("DELETE FROM generos WHERE id=?", [id]);      
+        await connection.query("DELETE FROM generos WHERE id = ?", [id]);      
     }
 }
 
