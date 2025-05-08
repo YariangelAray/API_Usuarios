@@ -70,7 +70,7 @@ class LenguajeController{
             const objLenguaje = new Lenguaje();
             await objLenguaje.delete(id);      
             
-            res.status(201).json({ mensaje: "Lenguaje eliminadao con exito." });
+            res.status(201).json({ mensaje: "Lenguaje eliminado con exito." });
       
         } catch (error) {
             res.status(500).json({ error: error.message });
