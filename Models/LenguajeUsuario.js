@@ -1,104 +1,50 @@
 import connection from "../Utils/db.js";
 
-
 class LenguajeUsuario {
 
-    // Método para obtener los usuarios relacionaos a un lenguaje por su ID
-    async geUsuariosByIdLenguaje(idLenguaje) {
-        const [usuarios] = await connection.query("SELECT * FROM lenguajes_usuarios WHERE id_lenguaje = ?", [idLenguaje]);        
-        return usuarios;
+    // Obtener un registro de lenguajes_usuarios por su id (PK)
+    async getById(id) {
+      const [lenguajeUsuario] = await connection.query("SELECT * FROM lenguajes_usuarios WHERE id = ?", [id]);
+      return lenguajeUsuario[0];
     }
-
-    // Método para obtener los lenguajes de un usuario por su ID
+  
+    // Obtener todos los registros de lenguajes relacionados a un usuario
     async getLenguajesByIdUsuario(idUsuario) {
-        try {
-            const [lenguajes] = await connection.query("SELECT * FROM lenguajes_usuarios WHERE id_usuario = ?", [idUsuario]);     
-
-            if (lenguajes.length === 0) throw new Error("Usuario no encontrado.");   
-
-            return lenguajes;
-
-        } catch (error) {
-            throw new Error(error.message || "Error al obtener los lenguajes del usuario.");            
-        }
+      const [lenguajes] = await connection.query("SELECT * FROM lenguajes_usuarios WHERE id_usuario = ?", [idUsuario]);
+      return lenguajes;
     }
-
-    // Método para crear un lenguaje relacionado a un usuario
+  
+    // Obtener todos los registros de usuario relacionados a un lenguaje
+    async geUsuariosByIdLenguaje(idLenguaje) {
+      const [usuarios] = await connection.query("SELECT * FROM lenguajes_usuarios WHERE id_lenguaje = ?", [idLenguaje]);
+      return usuarios;
+    }
+  
+    // Crear nueva relación lenguaje-usuario
     async create(idUsuario, idLenguaje) {
-        try {
-            const [result] = await connection.query("INSERT INTO lenguajes_usuarios(id_usuario, id_lenguaje) VALUE (?, ?)", [idUsuario, idLenguaje]);            
-
-            return { id: result.insertId, idUsuario, idLenguaje };
-
-        } catch (error) {
-            throw new Error(error.message || "Error al crear el lenguaje del usuario.");
-        }
+      const [result] = await connection.query("INSERT INTO lenguajes_usuarios (id_usuario, id_lenguaje) VALUES (?, ?)",[idUsuario, idLenguaje]);
+      return { id: result.insertId, idUsuario, idLenguaje };
     }
-
+  
     async update(id, idUsuario, idLenguaje) {
-        try {
-            const [result] = await connection.query("UPDATE lenguajes_usuarios SET id_usuario = ?, id_lenguaje = ? WHERE id = ?", [idUsuario, idLenguaje, id]);            
-
-            if (result.affectedRows === 0) throw new Error("Lenguaje de usuario no encontrado");
-
-            return { id, idUsuario, idLenguaje };
-
-        } catch (error) {
-            throw new Error(error.message || "Error al actualizar el lenguaje del usuario.");
-        }
+        await connection.query("UPDATE lenguajes_usuarios SET id_usuario = ?, id_lenguaje = ? WHERE id = ?", [idUsuario, idLenguaje, id]);
+      return { id, idUsuario, idLenguaje };
     }
-
-    async patch(id, propiedades) {
-        try {
-
-            if (!propiedades) {
-              throw new Error("No se han enviado propiedades para actualizar.");        
-            }
-      
-            let sentencia = "";
-            // Recorremos las propiedades y creamos la sentencia SQL
-            for (const key in propiedades) {        
-              sentencia += `${key} = "${propiedades[key]}", `;
-            }            
-            // Eliminamos la última coma y espacio 
-            sentencia = sentencia.slice(0, -2);   
-            
-            const [result] = await connection.query(`UPDATE lenguajes_usuarios SET ${sentencia} WHERE id = ?`, [id]);
-      
-            // Si no se actualizó ningún registro, lanzamos un error
-            if (result.affectedRows === 0) throw new Error("Lenguaje de usuario no encontrado");
-      
-        } catch (error) {
-            throw new Error (error.message || "Error al actualizar el lenguaje del usuario.");          
-        }
+  
+    async patch(id, sentencia) {
+      await connection.query(`UPDATE lenguajes_usuarios SET ${sentencia} WHERE id = ?`, [id]);
     }
-
+  
+    // Eliminar relación lenguaje-usuario
     async delete(id) {
-        try {
-            const [result] = await connection.query("DELETE FROM lenguajes_usuarios WHERE id = ?", [id]);            
-
-            if (result.affectedRows === 0) throw new Error("Lenguaje de usuario no encontrado.");
-
-            return;
-
-        } catch (error) {
-            throw new Error(error.message || "Error al eliminar el lenguaje del usuario.");
-        }
+      await connection.query("DELETE FROM lenguajes_usuarios WHERE id = ?",[id]);
     }
-
-    // Método para eliminar los lenguajes relacionados a un usuario por su ID
-    async deleteLenguajesUsuario(idUsuario){
-        try {
-            const [result] = await connection.query("DELETE FROM lenguajes_usuarios WHERE id_usuario = ?", [idUsuario]);
-
-            if (result.affectedRows === 0) throw new Error("Usuario no encontrado.");
-
-            return;
-
-        } catch (error) {
-            throw new Error(error.message || "Error al eliminar los lenguajes del usuario.");
-        }
+  
+    // Eliminar todos los lenguajes de un usuario
+    async deleteLenguajesByIdUsuario(idUsuario) {
+      await connection.query("DELETE FROM lenguajes_usuarios WHERE id_usuario = ?", [idUsuario]);
     }
-}
-
-export default LenguajeUsuario;
+  }
+  
+  export default LenguajeUsuario;
+  

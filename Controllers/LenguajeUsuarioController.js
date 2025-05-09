@@ -1,4 +1,4 @@
-import LenguajeUsuario from "../Models/LenguajeUsuario.js";
+import LenguajeUsuarioService from "../Services/LenguajeUsuarioService.js";
 
 class LenguajeUsuarioController{
 
@@ -6,8 +6,8 @@ class LenguajeUsuarioController{
         try {
             const { id } = req.params;      
 
-            const objLenguajeUsuario = new LenguajeUsuario();
-            const lenguajes = await objLenguajeUsuario.getLenguajesByIdUsuario(id);    
+            const lenguajeUsuarioService = new LenguajeUsuarioService();
+            const lenguajes = await lenguajeUsuarioService.getLenguajesByIdUsuario(id);    
 
             res.json({ mensaje: "Lenguajes del usuario", lenguajes});          
         } catch (error) {
@@ -19,10 +19,10 @@ class LenguajeUsuarioController{
         try {
             const { id_usuario, id_lenguaje } = req.body;      
 
-            const objLenguajeUsuario = new LenguajeUsuario();
-            const lenguajeUsuarioCreado = await objLenguajeUsuario.create(id_usuario, id_lenguaje);    
+            const lenguajeUsuarioService = new LenguajeUsuarioService();
+            const lenguajeUsuarioCreado = await lenguajeUsuarioService.create(id_usuario, id_lenguaje);    
 
-            res.status(201).json({mensaje: "Lenguaje de usuario creado con éxito", lenguajeUsuarioCreado});
+            res.status(201).json({mensaje: "Relación lenguaje-usuario agregada con éxito.", lenguajeUsuarioCreado});
         } catch (error) {
             res.status(500).json({error: error.message});
         }
@@ -33,10 +33,10 @@ class LenguajeUsuarioController{
             const { id } = req.params;
             const { id_usuario, id_lenguaje } = req.body;          
         
-            const objLenguajeUsuario = new LenguajeUsuario();
-            const lenguajeUsuarioActualizado = await objLenguajeUsuario.update(id, id_usuario, id_lenguaje);            
+            const lenguajeUsuarioService = new LenguajeUsuarioService();
+            const lenguajeUsuarioActualizado = await lenguajeUsuarioService.update(id, id_usuario, id_lenguaje);            
         
-            res.status(201).json({mensaje: "Lenguaje de usuario actualizado con éxito", lenguajeUsuarioActualizado});
+            res.status(201).json({mensaje: "Relación lenguaje-usuario actualizada con éxito.", lenguajeUsuarioActualizado});
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
@@ -47,10 +47,10 @@ class LenguajeUsuarioController{
             const { id } = req.params;        
             const propiedades = req.body;        
             
-            const objLenguajeUsuario = new LenguajeUsuario();            
-            await objLenguajeUsuario.patch(id, propiedades);        
+            const lenguajeUsuarioService = new LenguajeUsuarioService();            
+            await lenguajeUsuarioService.patch(id, propiedades);        
             
-            res.status(201).json({ mensaje: "Lenguaje de usuario actualizado" });
+            res.status(201).json({ mensaje: "Relación lenguaje-usuario actualizada con éxito." });
 
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -61,10 +61,10 @@ class LenguajeUsuarioController{
         try {
             const { id } = req.params;        
             
-            const objLenguajeUsuario = new LenguajeUsuario();            
-            await objLenguajeUsuario.delete(id);        
+            const lenguajeUsuarioService = new LenguajeUsuarioService();            
+            await lenguajeUsuarioService.delete(id);        
             
-            res.status(201).json({ mensaje: "Lenguaje de usuario eliminado" });
+            res.status(201).json({ mensaje: "Relación lenguaje-usuario eliminada con éxito." });
 
         } catch (error) {
             res.status(500).json({ error: error.message });

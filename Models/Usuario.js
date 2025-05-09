@@ -84,7 +84,7 @@ class Usuario{
         try {
             
             const objLenguajesUsuario = new LenguajeUsuario();
-            await objLenguajesUsuario.deleteLenguajesUsuario(id);
+            await objLenguajesUsuario.deleteLenguajesByIdUsuario(id);
 
             const [result] = await connection.query("DELETE FROM usuarios WHERE id = ?", [id]);
             

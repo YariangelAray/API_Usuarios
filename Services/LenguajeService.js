@@ -1,5 +1,5 @@
 import Lenguaje from "../Models/Lenguaje.js";
-import LenguajeUsuario from "../Models/LenguajeUsuario.js";
+import LenguajeUsuarioService from "../Models/LenguajeUsuario.js";
 
 class LenguajeService{
 
@@ -61,7 +61,7 @@ class LenguajeService{
 
             await this.getById(id);
 
-            const objUsuariosLeng = new LenguajeUsuario();
+            const objUsuariosLeng = new LenguajeUsuarioService();
             // Verificamos si el lenguaje tiene usuarios relacionados
             const usuarios = await objUsuariosLeng.geUsuariosByIdLenguaje(id);
                 
