@@ -36,6 +36,7 @@ class UsuarioService {
             genero: genero.nombre,
             no_documento: usuario.no_documento,
             usuario: usuario.usuario,
+            contrasena: usuario.contrasena,
             lenguajes
             };
 
