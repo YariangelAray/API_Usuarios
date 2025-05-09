@@ -10,8 +10,8 @@ class LenguajeService{
     async getById(id) {
         try {              
             const lenguaje = await this.objLenguaje.getById(id);    
-            if (lenguaje.length === 0) throw new Error("Lenguaje no encontrado.");
-            return lenguaje[0]
+            if (!lenguaje) throw new Error("Lenguaje no encontrado.");
+            return lenguaje;
         } catch (error) {
             throw new Error( error.message || "Error al obtener el lenguaje.");
         }     

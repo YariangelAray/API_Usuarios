@@ -1,21 +1,21 @@
 import LenguajeUsuario from "../Models/LenguajeUsuario.js";
-import Usuario from "../Models/Usuario.js";
 import LenguajeService from "./LenguajeService.js";
+import UsuarioService from "./UsuarioService.js";
 
 
 class LenguajeUsuarioService {
 
     constructor() {
         this.objLenguajeUsuario = new LenguajeUsuario();
-        this.usuarioService = new Usuario();
+        this.usuarioService = new UsuarioService();
         this.lenguajeService = new LenguajeService();
     }
 
     async getById(id) {
         try {
-          const registro = await objLenguajeUsuario.getById(id);
-          if (registro.length === 0) throw new Error("La relación lenguaje-usuario no existe.");
-          return registro[0];
+          const lenguajesUsuario = await this.objLenguajeUsuario.getById(id);
+          if (!lenguajesUsuario) throw new Error("La relación lenguaje-usuario no existe.");
+          return lenguajesUsuario;
         } catch (error) {
           throw new Error(error.message || "Error al obtener la relación lenguaje-usuario.");
         }
@@ -60,7 +60,7 @@ class LenguajeUsuarioService {
           await this.usuarioService.getById(id_usuario);
           await this.lenguajeService.getById(id_lenguaje);
     
-          const lenguajeUsuario = await LenguajeUsuarioModel.update(id, id_usuario, id_lenguaje);
+          const lenguajeUsuario = await this.objLenguajeUsuario.update(id, id_usuario, id_lenguaje);
           return lenguajeUsuario;
         } catch (error) {
           throw new Error(error.message || "Error al actualizar la relación lenguaje-usuario.");

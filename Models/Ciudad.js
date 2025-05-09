@@ -4,7 +4,7 @@ class Ciudad{
 
     async getById(id) {
         const [ciudad] = await connection.query("SELECT * FROM ciudades WHERE id = ?", [id]);
-        return ciudad;
+        return ciudad[0];
     }
 
     async create(nombre){

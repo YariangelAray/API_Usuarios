@@ -10,8 +10,8 @@ class GeneroService{
     async getById(id) {
         try {              
             const genero = await this.objGenero.getById(id);    
-            if (genero.length === 0) throw new Error("Género no encontrado.");
-            return genero[0]
+            if (!genero) throw new Error("Género no encontrado.");
+            return genero;
         } catch (error) {
             throw new Error( error.message || "Error al obtener el género.");
         }     

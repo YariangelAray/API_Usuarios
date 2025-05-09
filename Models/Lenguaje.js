@@ -5,7 +5,7 @@ class Lenguaje{
 
     async getById(id) {
         const [lenguaje] = await connection.query("SELECT * FROM lenguajes WHERE id = ?", [id]);
-        return lenguaje;
+        return lenguaje[0];
     }
 
     async create(nombre){

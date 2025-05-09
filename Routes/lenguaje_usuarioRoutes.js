@@ -4,7 +4,7 @@ import { validarLenguajeUsuario } from "../Middlewares/validarLenguajeUsuario.js
 
 const router = express.Router();
 
-router.get('/:id' , LenguajeUsuarioController.getLenguajesUsuarioById);
+router.get('/:id' , LenguajeUsuarioController.getLenguajeUsuarioById);
 
 router.post('/', validarLenguajeUsuario, LenguajeUsuarioController.createLenguajeUsuario);
 

@@ -10,8 +10,8 @@ class CiudadService{
     async getById(id) {
         try {              
             const ciudad = await this.objCiudad.getById(id);    
-            if (ciudad.length === 0) throw new Error("Ciudad no encontrada.");
-            return ciudad[0]
+            if (!ciudad) throw new Error("Ciudad no encontrada.");
+            return ciudad;
         } catch (error) {
             throw new Error( error.message || "Error al obtener la ciudad.");
         }     
@@ -25,7 +25,7 @@ class CiudadService{
             throw new Error("Error al crear la ciudad.");
         } 
     }
-
+    
     async update(id, nombre){
         try {
             await this.getById(id);

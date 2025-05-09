@@ -1,13 +1,13 @@
-import Usuario from "../Models/Usuario.js";
+import UsuarioService from "../Services/UsuarioService.js";
 
 class UsuarioController{
 
     static async getUsuarioById(req, res) 
     {
         try {
-            const objUsuario = new Usuario();
             const { id } = req.params;      
-            const usuario = await objUsuario.getById(id);    
+            const usuarioService = new UsuarioService();
+            const usuario = await usuarioService.getById(id);    
             res.json(usuario);    
       
         } catch (error) {
@@ -19,10 +19,10 @@ class UsuarioController{
     {
         try {
             const { nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena } = req.body;        
-            const objUsuario = new Usuario();
-            const usuarioCreado = await objUsuario.create(nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena);
+            const usuarioService = new UsuarioService();
+            const usuarioCreado = await usuarioService.create(nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena);
             
-            res.status(201).json({mensaje: "Usuario creado con éxito", usuarioCreado});
+            res.status(201).json({mensaje: "Usuario creado con éxito.", usuarioCreado});
       
         } catch (error) {
             res.status(500).json({error: error.message});
@@ -35,10 +35,10 @@ class UsuarioController{
             const { id } = req.params;
             const { nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena } = req.body;          
         
-            const objUsuario = new Usuario();
-            const usuarioActualizado = await objUsuario.update(id, nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena);
+            const usuarioService = new UsuarioService();
+            const usuarioActualizado = await usuarioService.update(id, nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena);
             
-            res.status(201).json({mensaje: "Usuario actualizado con éxito", usuarioActualizado});
+            res.status(201).json({mensaje: "Usuario actualizado con éxito.", usuarioActualizado});
       
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -48,15 +48,12 @@ class UsuarioController{
     static async patchUsuario(req, res) 
     {
         try {
-            const { id } = req.params;
+            const { id } = req.params;      
+            const propiedades = req.body;        
+            const usuarioService = new UsuarioService();             
+            const usuarioActualizado = await usuarioService.patch(id, propiedades);
       
-            const propiedades = req.body;
-        
-            const objUsuario = new Usuario();
-             
-            await objUsuario.patch(id, propiedades);
-      
-            res.status(201).json({ mensaje: "Usuario actualizado" });
+            res.status(201).json({ mensaje: "Usuario actualizado con éxito.", usuarioActualizado });
             
           } catch (error) {
             res.status(500).json({ error: error.message });
@@ -66,12 +63,11 @@ class UsuarioController{
     static async deleteUsuario(req, res) 
     {
         try {
-            const { id } = req.params;
-      
-            const objUsuario = new Usuario();
-            await objUsuario.delete(id);      
+            const { id } = req.params;      
+            const usuarioService = new UsuarioService();
+            const usuario = await usuarioService.delete(id);      
             
-            res.status(201).json({ mensaje: "Usuario eliminado con exito." });
+            res.status(201).json({ mensaje: "Usuario eliminado con éxito.", usuario });
       
         } catch (error) {
             res.status(500).json({ error: error.message });

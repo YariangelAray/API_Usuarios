@@ -2,14 +2,14 @@ import LenguajeUsuarioService from "../Services/LenguajeUsuarioService.js";
 
 class LenguajeUsuarioController{
 
-    static async getLenguajesUsuarioById(req, res) {
+    static async getLenguajeUsuarioById(req, res) {
         try {
             const { id } = req.params;      
 
             const lenguajeUsuarioService = new LenguajeUsuarioService();
-            const lenguajes = await lenguajeUsuarioService.getLenguajesByIdUsuario(id);    
+            const lenguajeUsuario = await lenguajeUsuarioService.getById(id);    
 
-            res.json({ mensaje: "Lenguajes del usuario", lenguajes});          
+            res.json(lenguajeUsuario);          
         } catch (error) {
             res.status(500).json({error: error.message});
         }      

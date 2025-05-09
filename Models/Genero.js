@@ -4,7 +4,7 @@ class Genero{
 
     async getById(id) {
         const [genero] = await connection.query("SELECT * FROM generos WHERE id = ?", [id]);
-        return genero;
+        return genero[0];
     }
 
     async create(nombre){
