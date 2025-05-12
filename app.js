@@ -1,5 +1,7 @@
 import express from "express";
+import cors from "cors";
 import bodyParser from "body-parser";
+
 import ciudadRoutes from "./Routes/ciudadRoutes.js";
 import generoRoutes from "./Routes/generoRoutes.js";
 import lenguajeRoutes from "./Routes/lenguajeRoutes.js";
@@ -8,6 +10,7 @@ import lenguaje_usuarioRoutes from "./Routes/lenguaje_usuarioRoutes.js";
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use(express.urlencoded({"extended":true}))

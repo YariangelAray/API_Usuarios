@@ -18,8 +18,8 @@ class GeneroController{
         try {
             const { id } = req.params;      
             const generoService = new GeneroService();
-            const ciudad = await generoService.getById(id);    
-            res.json(ciudad);    
+            const genero = await generoService.getById(id);    
+            res.json(genero);    
       
         } catch (error) {
             res.status(500).json({error: error.message});
@@ -31,9 +31,9 @@ class GeneroController{
         try {
             const { nombre } = req.body;        
             const generoService = new GeneroService();
-            const ciudad = await generoService.create(nombre);
+            const genero = await generoService.create(nombre);
             
-            res.status(201).json({mensaje: "Género creado", ciudad});
+            res.status(201).json({mensaje: "Género creado", genero});
       
         } catch (error) {
             res.status(500).json({error: error.message});
@@ -46,9 +46,9 @@ class GeneroController{
             const { id } = req.params;
             const { nombre } = req.body;                  
             const generoService = new GeneroService();
-            const ciudad = await generoService.update(id, nombre);
+            const genero = await generoService.update(id, nombre);
             
-            res.status(201).json({mensaje: "Género actualizado", ciudad});
+            res.status(201).json({mensaje: "Género actualizado", genero});
       
         } catch (error) {
             res.status(500).json({ error: error.message });
