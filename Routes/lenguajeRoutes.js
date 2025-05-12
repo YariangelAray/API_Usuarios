@@ -1,7 +1,10 @@
 import express from "express";
 import LenguajeController from "../Controllers/LenguajeController.js";
 import { validarLenguaje } from "../Middlewares/validarLenguaje.js";
+
 const router = express.Router();
+
+router.get('/', LenguajeController.getAllLenguajes);
 
 router.get('/:id' , LenguajeController.getLenguajeById);
 

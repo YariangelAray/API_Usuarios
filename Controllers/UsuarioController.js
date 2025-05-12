@@ -2,6 +2,17 @@ import UsuarioService from "../Services/UsuarioService.js";
 
 class UsuarioController{
 
+    static async getAllUsuarios(req, res){
+        try {
+            const usuarioService = new UsuarioService();
+            const usuarios = await usuarioService.getAll();
+            res.json(usuarios);          
+      
+        } catch (error) {
+            res.status(500).json({error: error.message});
+        }
+    }
+
     static async getUsuarioById(req, res) 
     {
         try {

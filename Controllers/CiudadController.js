@@ -2,6 +2,17 @@ import CiudadService from "../Services/CiudadService.js";
 
 class CiudadController{
 
+    static async getAllCiudades(req, res){
+        try {
+            const ciudadService = new CiudadService();
+            const ciudades = await ciudadService.getAll();
+            res.json(ciudades);          
+
+        } catch (error) {
+            res.status(500).json({error: error.message});
+        }
+    }
+
     static async getCiudadById(req, res) 
     {
         try {

@@ -1,6 +1,18 @@
 import LenguajeService from "../Services/LenguajeService.js";
 
 class LenguajeController{
+
+    static async getAllLenguajes(req, res){
+        try {
+            const lenguajeService = new LenguajeService();
+            const lenguajes = await lenguajeService.getAll();
+            res.json(lenguajes);          
+      
+        } catch (error) {
+            res.status(500).json({error: error.message});
+        }
+    }
+
     static async getLenguajeById(req, res) 
     {
         try {

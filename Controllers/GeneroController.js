@@ -2,6 +2,17 @@ import GeneroService from "../Services/GeneroService.js";
 
 class GeneroController{
 
+    static async getAllGeneros(req, res){
+        try {
+            const generoService = new GeneroService();
+            const generos = await generoService.getAll();
+            res.json(generos);          
+      
+        } catch (error) {
+            res.status(500).json({error: error.message});
+        }
+    }
+
     static async getGeneroById(req, res) 
     {
         try {

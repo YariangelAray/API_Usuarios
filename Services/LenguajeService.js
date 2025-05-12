@@ -7,6 +7,15 @@ class LenguajeService{
         this.objLenguaje = new Lenguaje();
     }
 
+    async getAll() {
+        try {
+            const lenguajes = await this.objLenguaje.getAll();
+            return lenguajes;
+        } catch (error) {
+            throw new Error(error.message || "Error al obtener los lenguajes.");
+        }
+    }
+
     async getById(id) {
         try {              
             const lenguaje = await this.objLenguaje.getById(id);    

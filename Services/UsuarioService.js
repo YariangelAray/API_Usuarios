@@ -14,6 +14,29 @@ class UsuarioService {
         this.objLenguajeUsuario = new LenguajeUsuario();
     }
 
+    async getAll(){
+        try {
+            const usuarios = await this.objUsuario.getAll();
+            return Promise.all(usuarios.map(async usuario => {
+                const ciudad = await this.ciudadService.getById(usuario.id_ciudad);
+                const genero = await this.generoService.getById(usuario.id_genero);
+                return {
+                    id: usuario.id,
+                    nombre: usuario.nombre,
+                    apellido: usuario.apellido,
+                    telefono: usuario.telefono,
+                    ciudad: ciudad.nombre,
+                    genero: genero.nombre,
+                    no_documento: usuario.no_documento,
+                    usuario: usuario.usuario,
+                    contrasena: usuario.contrasena
+                };
+            }));
+        } catch (error) {
+            throw new Error(error.message || "Error al obtener los usuarios.");
+        }
+    }
+
     async getById(id) {
         try {
             

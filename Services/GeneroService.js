@@ -7,6 +7,15 @@ class GeneroService{
         this.objGenero = new Genero();
     }
 
+    async getAll() {
+        try {
+            const generos = await this.objGenero.getAll();
+            return generos;
+        } catch (error) {
+            throw new Error(error.message || "Error al obtener los géneros.");
+        }
+    }
+
     async getById(id) {
         try {              
             const genero = await this.objGenero.getById(id);    

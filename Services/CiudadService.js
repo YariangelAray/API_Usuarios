@@ -7,6 +7,15 @@ class CiudadService{
         this.objCiudad = new Ciudad();
     }
 
+    async getAll() {
+        try {
+            const ciudades = await this.objCiudad.getAll();
+            return ciudades;
+        } catch (error) {
+            throw new Error(error.message || "Error al obtener las ciudades.");
+        }
+    }
+
     async getById(id) {
         try {              
             const ciudad = await this.objCiudad.getById(id);    

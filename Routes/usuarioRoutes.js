@@ -2,8 +2,9 @@ import express from "express";
 import UsuarioController from "../Controllers/UsuarioController.js";
 import { validarUsuario } from "../Middlewares/validarUsuario.js";
 
-
 const router = express.Router();
+
+router.get('/', UsuarioController.getAllUsuarios);
 
 router.get('/:id' , UsuarioController.getUsuarioById);
 

@@ -4,6 +4,8 @@ import { validarCiudad } from "../Middlewares/validarCiudad.js";
 
 const router = express.Router();
 
+router.get('/', CiudadController.getAllCiudades);
+
 router.get('/:id' , CiudadController.getCiudadById);
 
 router.post('/', validarCiudad, CiudadController.createCiudad);

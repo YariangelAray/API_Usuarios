@@ -2,6 +2,11 @@ import connection from "../Utils/db.js";
 
 class Ciudad{
 
+    async getAll(){
+        const [ciudades] = await connection.query("SELECT * FROM ciudades");
+        return ciudades;
+    }
+
     async getById(id) {
         const [ciudad] = await connection.query("SELECT * FROM ciudades WHERE id = ?", [id]);
         return ciudad[0];

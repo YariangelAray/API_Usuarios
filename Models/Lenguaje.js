@@ -3,6 +3,11 @@ import LenguajeUsuario from "./LenguajeUsuario.js";
 
 class Lenguaje{
 
+    async getAll(){
+        const [lenguajes] = await connection.query("SELECT * FROM lenguajes");
+        return lenguajes;
+    }
+
     async getById(id) {
         const [lenguaje] = await connection.query("SELECT * FROM lenguajes WHERE id = ?", [id]);
         return lenguaje[0];

@@ -4,6 +4,8 @@ import { validarGenero } from "../Middlewares/validarGenero.js";
 
 const router = express.Router();
 
+router.get('/', GeneroController.getAllGeneros);
+
 router.get('/:id' , GeneroController.getGeneroById);
 
 router.post('/', validarGenero, GeneroController.createGenero);

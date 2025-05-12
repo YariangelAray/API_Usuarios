@@ -2,6 +2,11 @@ import connection from "../Utils/db.js";
 
 class Genero{
 
+    async getAll(){
+        const [generos] = await connection.query("SELECT * FROM generos");
+        return generos;
+    }
+
     async getById(id) {
         const [genero] = await connection.query("SELECT * FROM generos WHERE id = ?", [id]);
         return genero[0];
