@@ -70,6 +70,20 @@ class LenguajeUsuarioController{
             res.status(500).json({ error: error.message });
         }  
     }
+
+    static async deleteLenguajesUsuarioByUsuario(req, res) {
+        try {
+            const { id } = req.params;        
+            
+            const lenguajeUsuarioService = new LenguajeUsuarioService();            
+            await lenguajeUsuarioService.deleteLenguajesByIdUsuario(id);        
+            
+            res.status(201).json({ mensaje: "Se han eliminado los lenguajes del usuario con éxito." });
+
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }  
+    }
 }
 
 export default LenguajeUsuarioController;

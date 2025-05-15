@@ -29,9 +29,9 @@ class UsuarioController{
     static async createUsuario(req, res) 
     {
         try {
-            const { nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena } = req.body;        
+            const { nombre, apellido, telefono, id_ciudad, id_genero, documento, usuario, contrasena } = req.body;        
             const usuarioService = new UsuarioService();
-            const usuarioCreado = await usuarioService.create(nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena);
+            const usuarioCreado = await usuarioService.create(nombre, apellido, telefono, id_ciudad, id_genero, documento, usuario, contrasena);
             
             res.status(201).json({mensaje: "Usuario creado con éxito.", usuarioCreado});
       
@@ -44,10 +44,10 @@ class UsuarioController{
     {
         try {
             const { id } = req.params;
-            const { nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena } = req.body;          
+            const { nombre, apellido, telefono, id_ciudad, id_genero, documento, usuario, contrasena } = req.body;          
         
             const usuarioService = new UsuarioService();
-            const usuarioActualizado = await usuarioService.update(id, nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena);
+            const usuarioActualizado = await usuarioService.update(id, nombre, apellido, telefono, id_ciudad, id_genero, documento, usuario, contrasena);
             
             res.status(201).json({mensaje: "Usuario actualizado con éxito.", usuarioActualizado});
       

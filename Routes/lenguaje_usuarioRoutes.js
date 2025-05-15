@@ -13,5 +13,6 @@ router.put('/:id', validarLenguajeUsuario, LenguajeUsuarioController.updateLengu
 router.patch('/:id', LenguajeUsuarioController.patchLenguajeUsuario);
 
 router.delete('/:id', LenguajeUsuarioController.deleteLenguajeUsuario);
+router.delete('/usuario/:id', LenguajeUsuarioController.deleteLenguajesUsuarioByUsuario);
 
 export default router;

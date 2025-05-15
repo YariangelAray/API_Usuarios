@@ -20,17 +20,7 @@ class UsuarioService {
             return Promise.all(usuarios.map(async usuario => {
                 const ciudad = await this.ciudadService.getById(usuario.id_ciudad);
                 const genero = await this.generoService.getById(usuario.id_genero);
-                return {
-                    id: usuario.id,
-                    nombre: usuario.nombre,
-                    apellido: usuario.apellido,
-                    telefono: usuario.telefono,
-                    ciudad: ciudad.nombre,
-                    genero: genero.nombre,
-                    no_documento: usuario.no_documento,
-                    usuario: usuario.usuario,
-                    contrasena: usuario.contrasena
-                };
+                return await this.getById(usuario.id);
             }));
         } catch (error) {
             throw new Error(error.message || "Error al obtener los usuarios.");
@@ -57,7 +47,7 @@ class UsuarioService {
             telefono: usuario.telefono,
             ciudad: ciudad.nombre,
             genero: genero.nombre,
-            no_documento: usuario.no_documento,
+            documento: usuario.documento,
             usuario: usuario.usuario,
             contrasena: usuario.contrasena,
             lenguajes
@@ -68,26 +58,26 @@ class UsuarioService {
         }
     }
 
-    async create(nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena) {
+    async create(nombre, apellido, telefono, id_ciudad, id_genero, documento, usuario, contrasena) {
         try {
             // Validar ciudad y genero        
             await this.ciudadService.getById(id_ciudad);
             await this.generoService.getById(id_genero);
                 
-            const usuarioCreado = await this.objUsuario.create(nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena);
+            const usuarioCreado = await this.objUsuario.create(nombre, apellido, telefono, id_ciudad, id_genero, documento, usuario, contrasena);
             return this.getById(usuarioCreado.id);        
         } catch (error) {
             throw new Error(error.message || "Error al crear el usuario.");                
         }
     }
 
-    async update(id, nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena, lenguajes = []) {
+    async update(id, nombre, apellido, telefono, id_ciudad, id_genero, documento, usuario, contrasena, lenguajes = []) {
         try {    
             await this.getById(id);
             await this.ciudadService.getById(id_ciudad);
             await this.generoService.getById(id_genero);
                 
-            await this.objUsuario.update(id, nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena);    
+            await this.objUsuario.update(id, nombre, apellido, telefono, id_ciudad, id_genero, documento, usuario, contrasena);    
             return this.getById(id);
         } catch (error) {
             throw new Error(error.message || "Error al actualizar el usuario.");

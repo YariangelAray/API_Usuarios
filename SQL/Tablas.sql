@@ -8,15 +8,15 @@ drop table if exists ciudades;
 
 create table ciudades(
 id int auto_increment primary key,
-ciudad varchar(30));
+nombre varchar(30));
 
 create table generos(
 id int auto_increment primary key,
-genero varchar(20));
+nombre varchar(20));
 
 create table lenguajes(
 id int auto_increment primary key,
-lenguaje varchar(30));
+nombre varchar(30));
 
 create table usuarios(
 id int auto_increment primary key,
@@ -25,7 +25,7 @@ apellido varchar(50),
 telefono bigint,
 id_ciudad int,
 id_genero int,
-no_documento bigint,
+documento bigint,
 usuario varchar(50),
 contrasena varchar(50),
 foreign key (id_ciudad) references ciudades(id),
@@ -37,10 +37,10 @@ id_lenguaje int,
 foreign key (id_usuario) references usuarios(id),
 foreign key (id_lenguaje) references lenguajes(id));
 
-insert into ciudades(ciudad) values ("Bucaramanga"), ("Girón"), ("Floridablanca");
+insert into ciudades(nombre) values ("Bucaramanga"), ("Girón"), ("Floridablanca");
 
-insert into generos(genero) values ("Femenino"), ("Masculino");
+insert into generos(nombre) values ("Femenino"), ("Masculino");
 
-insert into lenguajes(lenguaje) values("HTML"), ("JavaScript"), ("CSS"), ("Java"), ("PHP"), ("SQL"), ("C#");
+insert into lenguajes(nombre) values("HTML"), ("JavaScript"), ("CSS"), ("Java"), ("PHP"), ("SQL"), ("C#");
 
-select * from ciudades;
+select * from usuarios;

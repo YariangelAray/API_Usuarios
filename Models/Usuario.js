@@ -22,14 +22,14 @@ class Usuario{
         return usuario[0];
     }
           
-    async create(nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena) {
-        const [result] = await connection.query("INSERT INTO usuarios (nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena]);
+    async create(nombre, apellido, telefono, id_ciudad, id_genero, documento, usuario, contrasena) {
+        const [result] = await connection.query("INSERT INTO usuarios (nombre, apellido, telefono, id_ciudad, id_genero, documento, usuario, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [nombre, apellido, telefono, id_ciudad, id_genero, documento, usuario, contrasena]);
 
         return { id: result.insertId };
     }
     
-    async update(id, nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena) {
-        await connection.query("UPDATE usuarios SET nombre = ?, apellido = ?, telefono = ?, id_ciudad = ?, id_genero = ?, no_documento = ?, usuario = ?, contrasena = ? WHERE id = ?", [nombre, apellido, telefono, id_ciudad, id_genero, no_documento, usuario, contrasena, id]);        
+    async update(id, nombre, apellido, telefono, id_ciudad, id_genero, documento, usuario, contrasena) {
+        await connection.query("UPDATE usuarios SET nombre = ?, apellido = ?, telefono = ?, id_ciudad = ?, id_genero = ?, documento = ?, usuario = ?, contrasena = ? WHERE id = ?", [nombre, apellido, telefono, id_ciudad, id_genero, documento, usuario, contrasena, id]);        
     }
 
     async patch(id, sentencia) {

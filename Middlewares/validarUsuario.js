@@ -2,7 +2,7 @@ export const validarUsuario = (req, res, next) => {
     const camposEsperados = [
         "nombre", "apellido", "telefono",
         "id_ciudad", "id_genero",
-        "no_documento", "usuario", "contrasena"
+        "documento", "usuario", "contrasena"
       ];
     
       for (const campo of camposEsperados) {
