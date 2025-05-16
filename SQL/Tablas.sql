@@ -32,6 +32,7 @@ foreign key (id_ciudad) references ciudades(id),
 foreign key (id_genero) references generos(id));
 
 create table lenguajes_usuarios(
+id int auto_increment primary key,
 id_usuario int,
 id_lenguaje int,
 foreign key (id_usuario) references usuarios(id),
